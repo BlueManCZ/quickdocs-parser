@@ -49,10 +49,10 @@
     (loop for comp in (asdf-components (asdf:find-system system-name))
           do (handler-case (typecase comp
                              (asdf:cl-source-file
-                              (asdf:perform (make-instance 'asdf:compile-op) comp)
-                              (asdf:perform (make-instance 'asdf:load-op) comp))
+                               (asdf:perform (asdf:make-operation 'asdf:compile-op) comp)
+                               (asdf:perform (asdf:make-operation 'asdf:load-op) comp))
                              (asdf:c-source-file
-                              (asdf:perform (make-instance 'asdf:load-op) comp)))
+                               (asdf:perform (asdf:make-operation 'asdf:load-op) comp)))
                (error (e)
                  (princ e *error-output*) (fresh-line *error-output*))))))
 
